@@ -1,42 +1,35 @@
 pcall(function()
     loadstring(readfile("lib/esp.lua"))()
 end)
-local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
-local Window = Rayfield:CreateWindow({
-   Name = "ESP Hub",
-   LoadingTitle = "Loading ESP Hub...",
-   LoadingSubtitle = "by You",
-   ConfigurationSaving = {
-      Enabled = false
-   },
-   KeySystem = false
+local Fluent = loadstring(game:HttpGet("https://github.com/dawid-scripts/Fluent/releases/latest/download/main.lua"))()
+
+local Window = Fluent:CreateWindow({
+    Title = "ESP Hub",
+    SubTitle = "by You",
+    TabWidth = 160,
+    Size = UDim2.fromOffset(580, 460),
+    Acrylic = true,
+    Theme = "Dark",
+    MinimizeKey = Enum.KeyCode.LeftControl
 })
 
-local Tab = Window:CreateTab("ESP", nil)
+local Tabs = {
+    ESP = Window:AddTab({ Title = "ESP", Icon = "eye" })
+}
 
-Tab:CreateToggle({
-   Name = "Enable ESP",
-   CurrentValue = false,
-   Flag = "Toggle1",
-   Callback = function(Value)
-        getgenv().ESP_Settings.Enabled = Value
-   end,
-})
+local Toggle1 = Tabs.ESP:AddToggle("Toggle1", {Title = "Enable ESP", Default = false})
+Toggle1:OnChanged(function()
+    getgenv().ESP_Settings.Enabled = Toggle1.Value
+end)
 
-Tab:CreateToggle({
-   Name = "Show Username",
-   CurrentValue = false,
-   Flag = "Toggle2",
-   Callback = function(Value)
-        getgenv().ESP_Settings.ShowName = Value
-   end,
-})
+local Toggle2 = Tabs.ESP:AddToggle("Toggle2", {Title = "Show Username", Default = false})
+Toggle2:OnChanged(function()
+    getgenv().ESP_Settings.ShowName = Toggle2.Value
+end)
 
-Tab:CreateToggle({
-   Name = "Show Team",
-   CurrentValue = false,
-   Flag = "Toggle3",
-   Callback = function(Value)
-        getgenv().ESP_Settings.ShowTeam = Value
-   end,
-})
+local Toggle3 = Tabs.ESP:AddToggle("Toggle3", {Title = "Show Team", Default = false})
+Toggle3:OnChanged(function()
+    getgenv().ESP_Settings.ShowTeam = Toggle3.Value
+end)
+
+Window:SelectTab(1)
