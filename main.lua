@@ -1,8 +1,8 @@
-local urlESP = "https://raw.githubusercontent.com/sanzydev/IDK/master/lib/esp.lua"
+local urlESP = "https://raw.githubusercontent.com/sanzydev/IDK/master/lib/esp.lua?t=" .. tostring(tick())
 pcall(function()
     loadstring(game:HttpGet(urlESP))()
 end)
-local WindUI = loadstring(game:HttpGet("https://tree-stores.github.io/WindUI/main.lua"))()
+local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
 local Window = WindUI:CreateWindow({
     Title = "ESP Hub",
     Icon = "rbxassetid://10618928818",
