@@ -1,40 +1,42 @@
 pcall(function()
     loadstring(readfile("lib/esp.lua"))()
 end)
-local WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
-local Window = WindUI:CreateWindow({
-    Title = "ESP Hub",
-    Icon = "rbxassetid://10618928818",
-    Author = "You",
-    Folder = "ESPHub",
-    Size = UDim2.fromOffset(580, 460),
-    Transparent = true,
-    Theme = "Dark",
-    SideBarWidth = 200,
-    HasOutline = true
+local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
+local Window = Rayfield:CreateWindow({
+   Name = "ESP Hub",
+   LoadingTitle = "Loading ESP Hub...",
+   LoadingSubtitle = "by You",
+   ConfigurationSaving = {
+      Enabled = false
+   },
+   KeySystem = false
 })
-local Tab = Window:Tab({
-    Title = "ESP",
-    Icon = "rbxassetid://10618928818"
+
+local Tab = Window:CreateTab("ESP", nil)
+
+Tab:CreateToggle({
+   Name = "Enable ESP",
+   CurrentValue = false,
+   Flag = "Toggle1",
+   Callback = function(Value)
+        getgenv().ESP_Settings.Enabled = Value
+   end,
 })
-Tab:Toggle({
-    Title = "Enable ESP",
-    Callback = function(value)
-        getgenv().ESP_Settings.Enabled = value
-    end,
-    Default = false
+
+Tab:CreateToggle({
+   Name = "Show Username",
+   CurrentValue = false,
+   Flag = "Toggle2",
+   Callback = function(Value)
+        getgenv().ESP_Settings.ShowName = Value
+   end,
 })
-Tab:Toggle({
-    Title = "Show Username",
-    Callback = function(value)
-        getgenv().ESP_Settings.ShowName = value
-    end,
-    Default = false
-})
-Tab:Toggle({
-    Title = "Show Team",
-    Callback = function(value)
-        getgenv().ESP_Settings.ShowTeam = value
-    end,
-    Default = false
+
+Tab:CreateToggle({
+   Name = "Show Team",
+   CurrentValue = false,
+   Flag = "Toggle3",
+   Callback = function(Value)
+        getgenv().ESP_Settings.ShowTeam = Value
+   end,
 })
